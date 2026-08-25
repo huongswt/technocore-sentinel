@@ -1,0 +1,68 @@
+name: Technocore Sentinel
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: technocore-sentinel
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependency
+        run: pip install -r requirements.txt
+
+      - name: Run sentinel
+        id: sentinel
+        continue-on-error: true
+        env:
+          TECHNOCORE_BASE_URL: https://technocore.chat
+          PROBE_SAMPLES: "2"
+          TECHNOCORE_DID: ${{ vars.TECHNOCORE_DID }}
+          TECHNOCORE_ROOM: ${{ vars.TECHNOCORE_ROOM }}
+          ENABLE_TECHNOCORE_POST: ${{ vars.ENABLE_TECHNOCORE_POST }}
+          SIGN_SEED: ${{ secrets.SIGN_SEED }}
+        run: python -m src.monitor
+
+      - name: Add report to workflow summary
+        if: always()
+        run: |
+          echo '## Technocore Sentinel' >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          cat data/latest.json >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Persist public monitor data
+        if: always()
+        run: |
+          git config user.name "technocore-sentinel[bot]"
+          git config user.email "technocore-sentinel[bot]@users.noreply.github.com"
+          git add data/latest.json data/history.jsonl
+          if git diff --cached --quiet; then
+            echo "No monitor data changes to commit."
+          else
+            git commit -m "chore: record Technocore health check"
+            git push
+          fi
+
+      - name: Fail job if sentinel detected downtime
+        if: steps.sentinel.outcome == 'failure'
+        run: exit 1
