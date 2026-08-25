@@ -2,6 +2,12 @@ name: Technocore Sentinel
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/**"
+      - ".github/workflows/sentinel.yml"
   schedule:
     - cron: "17 */6 * * *"
 
