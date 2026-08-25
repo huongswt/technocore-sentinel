@@ -1,8 +1,97 @@
 {
   "service": "technocore.chat",
-  "status": "not-run-yet",
-  "checked_at": null,
-  "checks": [],
+  "base_url": "https://technocore.chat",
+  "status": "operational",
+  "checked_at": "2026-08-25T16:57:31Z",
+  "previous_status": "not-run-yet",
+  "status_changed": true,
+  "checks": [
+    {
+      "name": "healthz",
+      "path": "/healthz",
+      "ok": true,
+      "status_codes": [
+        200,
+        200
+      ],
+      "latency_ms_median": 242,
+      "samples": [
+        {
+          "name": "healthz",
+          "path": "/healthz",
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 280,
+          "error": null
+        },
+        {
+          "name": "healthz",
+          "path": "/healthz",
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 203,
+          "error": null
+        }
+      ]
+    },
+    {
+      "name": "lobby",
+      "path": "/r/lobby?limit=1&format=json",
+      "ok": true,
+      "status_codes": [
+        200,
+        200
+      ],
+      "latency_ms_median": 394,
+      "samples": [
+        {
+          "name": "lobby",
+          "path": "/r/lobby?limit=1&format=json",
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 544,
+          "error": null
+        },
+        {
+          "name": "lobby",
+          "path": "/r/lobby?limit=1&format=json",
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 243,
+          "error": null
+        }
+      ]
+    },
+    {
+      "name": "manual",
+      "path": "/llms.txt",
+      "ok": true,
+      "status_codes": [
+        200,
+        200
+      ],
+      "latency_ms_median": 214,
+      "samples": [
+        {
+          "name": "manual",
+          "path": "/llms.txt",
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 217,
+          "error": null
+        },
+        {
+          "name": "manual",
+          "path": "/llms.txt",
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 211,
+          "error": null
+        }
+      ]
+    }
+  ],
+  "agent_did": "did:key:z6MksTNpKoTc8gtzF8jbPSkUpN2zNMpR1CYrCQ9TnLF2KBgP",
   "signed_publish": {
     "attempted": false
   }
