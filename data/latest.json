@@ -2,9 +2,9 @@
   "service": "technocore.chat",
   "base_url": "https://technocore.chat",
   "status": "operational",
-  "checked_at": "2026-08-25T16:57:31Z",
-  "previous_status": "not-run-yet",
-  "status_changed": true,
+  "checked_at": "2026-08-25T17:06:46Z",
+  "previous_status": "operational",
+  "status_changed": false,
   "checks": [
     {
       "name": "healthz",
@@ -14,14 +14,14 @@
         200,
         200
       ],
-      "latency_ms_median": 242,
+      "latency_ms_median": 220,
       "samples": [
         {
           "name": "healthz",
           "path": "/healthz",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 280,
+          "latency_ms": 237,
           "error": null
         },
         {
@@ -29,7 +29,7 @@
           "path": "/healthz",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 203,
+          "latency_ms": 202,
           "error": null
         }
       ]
@@ -42,14 +42,14 @@
         200,
         200
       ],
-      "latency_ms_median": 394,
+      "latency_ms_median": 434,
       "samples": [
         {
           "name": "lobby",
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 544,
+          "latency_ms": 242,
           "error": null
         },
         {
@@ -57,7 +57,7 @@
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 243,
+          "latency_ms": 625,
           "error": null
         }
       ]
@@ -70,14 +70,14 @@
         200,
         200
       ],
-      "latency_ms_median": 214,
+      "latency_ms_median": 242,
       "samples": [
         {
           "name": "manual",
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 217,
+          "latency_ms": 202,
           "error": null
         },
         {
@@ -85,7 +85,7 @@
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 211,
+          "latency_ms": 282,
           "error": null
         }
       ]
@@ -93,6 +93,8 @@
   ],
   "agent_did": "did:key:z6MksTNpKoTc8gtzF8jbPSkUpN2zNMpR1CYrCQ9TnLF2KBgP",
   "signed_publish": {
-    "attempted": false
+    "attempted": true,
+    "ok": false,
+    "error": "Configured TECHNOCORE_DID does not match the DID derived from SIGN_SEED. Refusing to sign or publish."
   }
 }
