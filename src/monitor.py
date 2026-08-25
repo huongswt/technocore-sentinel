@@ -7,7 +7,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .identity import did_of, load_private_key
+from .identity import diagnose_identity
 from .technocore import DEFAULT_BASE_URL, post_signed_message, probe
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -106,14 +106,20 @@ def main() -> None:
     seed_present = bool(os.getenv("SIGN_SEED"))
     room = (os.getenv("TECHNOCORE_ROOM") or "sentinel-huongswt").strip().lower()
 
-    # Safe public diagnostic: derive only the public DID from the secret.
-    # The secret/phrase itself is never printed, stored, or returned.
-    derived_did: str | None = None
-    if seed_present:
+    diagnostics: list[dict] = []
+    matched_method: str | None = None
+    if seed_present and did:
         try:
-            derived_did = did_of(load_private_key())
-        except Exception:
-            derived_did = None
+            for item in diagnose_identity(did):
+                diagnostics.append({
+                    "method": item.method,
+                    "derived_did": item.derived_did,
+                    "matches": item.matches,
+                })
+                if item.matches and matched_method is None:
+                    matched_method = item.method
+        except Exception as exc:
+            diagnostics = [{"method": "diagnostic_error", "error": str(exc), "matches": False}]
 
     report = {
         "service": "technocore.chat",
@@ -124,7 +130,8 @@ def main() -> None:
         "status_changed": previous_status is not None and previous_status != status,
         "checks": checks,
         "agent_did": did or None,
-        "derived_did": derived_did,
+        "identity_diagnostics": diagnostics,
+        "identity_match_method": matched_method,
         "signed_publish": {"attempted": False},
     }
 
@@ -134,13 +141,11 @@ def main() -> None:
             report["signed_publish"] = {"attempted": True, "ok": False, "error": "TECHNOCORE_DID is missing"}
         elif not seed_present:
             report["signed_publish"] = {"attempted": True, "ok": False, "error": "SIGN_SEED secret is missing"}
-        elif not derived_did:
-            report["signed_publish"] = {"attempted": True, "ok": False, "error": "Could not derive DID from configured secret"}
-        elif derived_did != did:
+        elif not matched_method:
             report["signed_publish"] = {
                 "attempted": True,
                 "ok": False,
-                "error": "DID mismatch; no message was signed or published",
+                "error": "No safe secret normalization matches configured DID; no message was signed or published",
             }
         else:
             try:

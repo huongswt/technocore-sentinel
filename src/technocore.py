@@ -7,7 +7,7 @@ import urllib.parse
 import urllib.request
 from dataclasses import dataclass, asdict
 
-from .identity import did_of, load_private_key, sign_message
+from .identity import resolve_private_key, sign_message
 
 DEFAULT_BASE_URL = "https://technocore.chat"
 USER_AGENT = "technocore-sentinel/1.0 (+github-monitor)"
@@ -60,15 +60,8 @@ def post_signed_message(
     text: str,
     timeout: float = 10.0,
 ) -> dict:
-    key = load_private_key()
-    derived_did = did_of(key)
-    if derived_did != did:
-        raise RuntimeError(
-            "Configured TECHNOCORE_DID does not match the DID derived from SIGN_SEED. "
-            "Refusing to sign or publish."
-        )
-
-    clean, signature = sign_message(key, room, nonce, text)
+    resolution = resolve_private_key(did)
+    clean, signature = sign_message(resolution.key, room, nonce, text)
     q = urllib.parse.quote
     path = "/r/{room}/say-signed/{did}/{sig}/{nonce}/{text}".format(
         room=q(room, safe=""),
@@ -93,5 +86,6 @@ def post_signed_message(
         "latency_ms": latency,
         "room": room,
         "did": did,
+        "identity_method": resolution.method,
         "response": parsed if parsed is not None else body[:1000],
     }

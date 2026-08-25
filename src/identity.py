@@ -13,6 +13,7 @@ MULTICODEC_ED25519 = b"\xed\x01"
 B58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 INVISIBLE_CATEGORIES = ("Cc", "Cf", "Cs", "Co", "Zl", "Zp")
 NONCE_RE = re.compile(r"^[0-9]{1,19}$")
+HEX64_RE = re.compile(r"^[0-9a-fA-F]{64}$")
 
 
 def sweep(text: str, limit: int = 4096) -> str:
@@ -37,24 +38,27 @@ def _base58btc(raw: bytes) -> str:
     return "1" * leading_zeroes + (out or "1")
 
 
-def load_private_key(seed_value: str | None = None) -> Ed25519PrivateKey:
-    """Load key using the same convention as Technocore's official scripts/sign.py.
-
-    * 64 hexadecimal characters -> raw 32-byte Ed25519 seed.
-    * any other string -> SHA-256(string) used as the 32-byte seed.
-
-    The function intentionally never logs or returns the original secret.
-    """
-    given = seed_value if seed_value is not None else os.getenv("SIGN_SEED")
-    if not given:
-        raise ValueError("SIGN_SEED is not configured")
-    if len(given) == 64:
-        try:
-            return Ed25519PrivateKey.from_private_bytes(bytes.fromhex(given))
-        except ValueError:
-            pass
+def _key_from_value(given: str) -> Ed25519PrivateKey:
+    """Technocore official signer convention for one interpreted secret value."""
+    if HEX64_RE.fullmatch(given):
+        return Ed25519PrivateKey.from_private_bytes(bytes.fromhex(given))
     digest = hashlib.sha256(given.encode("utf-8")).digest()
     return Ed25519PrivateKey.from_private_bytes(digest)
+
+
+def _secret() -> str:
+    given = os.getenv("SIGN_SEED")
+    if not given:
+        raise ValueError("SIGN_SEED is not configured")
+    return given
+
+
+def load_private_key(seed_value: str | None = None) -> Ed25519PrivateKey:
+    """Load the secret exactly as configured, using Technocore's official convention."""
+    given = seed_value if seed_value is not None else _secret()
+    if not given:
+        raise ValueError("SIGN_SEED is not configured")
+    return _key_from_value(given)
 
 
 def did_of(key: Ed25519PrivateKey) -> str:
@@ -71,14 +75,77 @@ def sign_message(key: Ed25519PrivateKey, room: str, nonce: str, text: str) -> tu
     return clean, base64.urlsafe_b64encode(sig).decode("ascii").rstrip("=")
 
 
+def _candidate_values(given: str) -> list[tuple[str, str]]:
+    """Try only conservative CMD/GitHub-entry normalizations.
+
+    These cover common copy/paste mistakes without inventing a new cryptographic
+    derivation scheme. The secret values themselves are never returned publicly.
+    """
+    raw: list[tuple[str, str]] = [("official_exact", given)]
+
+    stripped = given.strip()
+    if stripped != given and stripped:
+        raw.append(("trim_outer_whitespace", stripped))
+
+    for source_name, source in (("exact", given), ("trimmed", stripped)):
+        if len(source) >= 2 and source[0] == source[-1] and source[0] in {'"', "'"}:
+            inner = source[1:-1]
+            if inner:
+                raw.append((f"unwrap_quotes_from_{source_name}", inner))
+
+    for source_name, source in (("exact", given), ("trimmed", stripped)):
+        if source.lower().startswith("0x") and HEX64_RE.fullmatch(source[2:]):
+            raw.append((f"strip_0x_prefix_from_{source_name}", source[2:]))
+
+        compact = "".join(ch for ch in source if not ch.isspace())
+        if compact != source and HEX64_RE.fullmatch(compact):
+            raw.append((f"compact_hex_whitespace_from_{source_name}", compact))
+
+    # Deduplicate by interpreted secret value while keeping the first/best label.
+    seen: set[str] = set()
+    out: list[tuple[str, str]] = []
+    for method, value in raw:
+        if value not in seen:
+            seen.add(value)
+            out.append((method, value))
+    return out
+
+
 @dataclass(frozen=True)
-class IdentityCheck:
-    configured_did: str
+class IdentityCandidate:
+    method: str
     derived_did: str
     matches: bool
 
 
-def verify_identity(configured_did: str, seed_value: str | None = None) -> IdentityCheck:
-    key = load_private_key(seed_value)
-    derived = did_of(key)
-    return IdentityCheck(configured_did=configured_did, derived_did=derived, matches=derived == configured_did)
+@dataclass(frozen=True)
+class IdentityResolution:
+    method: str
+    derived_did: str
+    key: Ed25519PrivateKey
+
+
+def diagnose_identity(configured_did: str, seed_value: str | None = None) -> list[IdentityCandidate]:
+    given = seed_value if seed_value is not None else _secret()
+    candidates: list[IdentityCandidate] = []
+    for method, value in _candidate_values(given):
+        key = _key_from_value(value)
+        derived = did_of(key)
+        candidates.append(
+            IdentityCandidate(method=method, derived_did=derived, matches=derived == configured_did)
+        )
+    return candidates
+
+
+def resolve_private_key(configured_did: str, seed_value: str | None = None) -> IdentityResolution:
+    """Resolve the configured DID using safe input-normalization candidates only."""
+    given = seed_value if seed_value is not None else _secret()
+    for method, value in _candidate_values(given):
+        key = _key_from_value(value)
+        derived = did_of(key)
+        if derived == configured_did:
+            return IdentityResolution(method=method, derived_did=derived, key=key)
+    raise RuntimeError(
+        "No safe CMD/GitHub secret normalization matches TECHNOCORE_DID. "
+        "The original DID may have been created from a different random seed."
+    )
