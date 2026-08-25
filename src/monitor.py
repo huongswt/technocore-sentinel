@@ -7,6 +7,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .identity import did_of, load_private_key
 from .technocore import DEFAULT_BASE_URL, post_signed_message, probe
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -100,6 +101,20 @@ def main() -> None:
     now = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     previous_status = previous.get("status") if previous else None
 
+    enabled = env_bool("ENABLE_TECHNOCORE_POST", False)
+    did = (os.getenv("TECHNOCORE_DID") or "").strip()
+    seed_present = bool(os.getenv("SIGN_SEED"))
+    room = (os.getenv("TECHNOCORE_ROOM") or "sentinel-huongswt").strip().lower()
+
+    # Safe public diagnostic: derive only the public DID from the secret.
+    # The secret/phrase itself is never printed, stored, or returned.
+    derived_did: str | None = None
+    if seed_present:
+        try:
+            derived_did = did_of(load_private_key())
+        except Exception:
+            derived_did = None
+
     report = {
         "service": "technocore.chat",
         "base_url": base_url,
@@ -108,14 +123,10 @@ def main() -> None:
         "previous_status": previous_status,
         "status_changed": previous_status is not None and previous_status != status,
         "checks": checks,
-        "agent_did": os.getenv("TECHNOCORE_DID") or None,
+        "agent_did": did or None,
+        "derived_did": derived_did,
         "signed_publish": {"attempted": False},
     }
-
-    enabled = env_bool("ENABLE_TECHNOCORE_POST", False)
-    did = (os.getenv("TECHNOCORE_DID") or "").strip()
-    seed_present = bool(os.getenv("SIGN_SEED"))
-    room = (os.getenv("TECHNOCORE_ROOM") or "sentinel-huongswt").strip().lower()
 
     if enabled:
         report["signed_publish"]["attempted"] = True
@@ -123,6 +134,14 @@ def main() -> None:
             report["signed_publish"] = {"attempted": True, "ok": False, "error": "TECHNOCORE_DID is missing"}
         elif not seed_present:
             report["signed_publish"] = {"attempted": True, "ok": False, "error": "SIGN_SEED secret is missing"}
+        elif not derived_did:
+            report["signed_publish"] = {"attempted": True, "ok": False, "error": "Could not derive DID from configured secret"}
+        elif derived_did != did:
+            report["signed_publish"] = {
+                "attempted": True,
+                "ok": False,
+                "error": "DID mismatch; no message was signed or published",
+            }
         else:
             try:
                 nonce = str(int(time.time() * 1000))
