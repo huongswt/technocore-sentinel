@@ -2,7 +2,7 @@
   "service": "technocore.chat",
   "base_url": "https://technocore.chat",
   "status": "operational",
-  "checked_at": "2026-08-25T17:10:47Z",
+  "checked_at": "2026-08-25T17:19:38Z",
   "previous_status": "operational",
   "status_changed": false,
   "checks": [
@@ -14,14 +14,14 @@
         200,
         200
       ],
-      "latency_ms_median": 285,
+      "latency_ms_median": 363,
       "samples": [
         {
           "name": "healthz",
           "path": "/healthz",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 299,
+          "latency_ms": 459,
           "error": null
         },
         {
@@ -29,7 +29,7 @@
           "path": "/healthz",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 271,
+          "latency_ms": 267,
           "error": null
         }
       ]
@@ -42,14 +42,14 @@
         200,
         200
       ],
-      "latency_ms_median": 288,
+      "latency_ms_median": 264,
       "samples": [
         {
           "name": "lobby",
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 290,
+          "latency_ms": 260,
           "error": null
         },
         {
@@ -57,7 +57,7 @@
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 286,
+          "latency_ms": 268,
           "error": null
         }
       ]
@@ -70,14 +70,14 @@
         200,
         200
       ],
-      "latency_ms_median": 270,
+      "latency_ms_median": 298,
       "samples": [
         {
           "name": "manual",
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 266,
+          "latency_ms": 286,
           "error": null
         },
         {
@@ -85,17 +85,24 @@
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 273,
+          "latency_ms": 311,
           "error": null
         }
       ]
     }
   ],
   "agent_did": "did:key:z6MksTNpKoTc8gtzF8jbPSkUpN2zNMpR1CYrCQ9TnLF2KBgP",
-  "derived_did": "did:key:z6MknMgYV6WhNQDWJzCVXzwxeKANoHwdQJnXQjQ9SQxmnMxk",
+  "identity_diagnostics": [
+    {
+      "method": "official_exact",
+      "derived_did": "did:key:z6MknMgYV6WhNQDWJzCVXzwxeKANoHwdQJnXQjQ9SQxmnMxk",
+      "matches": false
+    }
+  ],
+  "identity_match_method": null,
   "signed_publish": {
     "attempted": true,
     "ok": false,
-    "error": "DID mismatch; no message was signed or published"
+    "error": "No safe secret normalization matches configured DID; no message was signed or published"
   }
 }
