@@ -1,0 +1,9 @@
+{
+  "service": "technocore.chat",
+  "status": "not-run-yet",
+  "checked_at": null,
+  "checks": [],
+  "signed_publish": {
+    "attempted": false
+  }
+}
