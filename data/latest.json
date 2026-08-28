@@ -1,35 +1,35 @@
 {
   "service": "technocore.chat",
   "base_url": "https://technocore.chat",
-  "status": "operational",
-  "checked_at": "2026-08-28T11:25:15Z",
+  "status": "down",
+  "checked_at": "2026-08-28T22:21:56Z",
   "previous_status": "operational",
-  "status_changed": false,
+  "status_changed": true,
   "checks": [
     {
       "name": "healthz",
       "path": "/healthz",
-      "ok": true,
+      "ok": false,
       "status_codes": [
-        200,
-        200
+        503,
+        503
       ],
-      "latency_ms_median": 722,
+      "latency_ms_median": null,
       "samples": [
         {
           "name": "healthz",
           "path": "/healthz",
-          "ok": true,
-          "status_code": 200,
-          "latency_ms": 1049,
+          "ok": false,
+          "status_code": 503,
+          "latency_ms": 335,
           "error": null
         },
         {
           "name": "healthz",
           "path": "/healthz",
-          "ok": true,
-          "status_code": 200,
-          "latency_ms": 395,
+          "ok": false,
+          "status_code": 503,
+          "latency_ms": 277,
           "error": null
         }
       ]
@@ -42,14 +42,14 @@
         200,
         200
       ],
-      "latency_ms_median": 582,
+      "latency_ms_median": 2867,
       "samples": [
         {
           "name": "lobby",
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 587,
+          "latency_ms": 5352,
           "error": null
         },
         {
@@ -57,7 +57,7 @@
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 577,
+          "latency_ms": 382,
           "error": null
         }
       ]
@@ -70,14 +70,14 @@
         200,
         200
       ],
-      "latency_ms_median": 498,
+      "latency_ms_median": 430,
       "samples": [
         {
           "name": "manual",
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 896,
+          "latency_ms": 825,
           "error": null
         },
         {
@@ -85,7 +85,7 @@
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 99,
+          "latency_ms": 34,
           "error": null
         }
       ]
