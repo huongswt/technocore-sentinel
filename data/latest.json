@@ -2,7 +2,7 @@
   "service": "technocore.chat",
   "base_url": "https://technocore.chat",
   "status": "down",
-  "checked_at": "2026-08-30T16:42:22Z",
+  "checked_at": "2026-08-30T21:08:04Z",
   "previous_status": "down",
   "status_changed": false,
   "checks": [
@@ -21,7 +21,7 @@
           "path": "/healthz",
           "ok": false,
           "status_code": 503,
-          "latency_ms": 497,
+          "latency_ms": 312,
           "error": null
         },
         {
@@ -29,7 +29,7 @@
           "path": "/healthz",
           "ok": false,
           "status_code": 503,
-          "latency_ms": 288,
+          "latency_ms": 276,
           "error": null
         }
       ]
@@ -40,24 +40,24 @@
       "ok": false,
       "status_codes": [
         503,
-        503
+        200
       ],
-      "latency_ms_median": null,
+      "latency_ms_median": 5391,
       "samples": [
         {
           "name": "lobby",
           "path": "/r/lobby?limit=1&format=json",
           "ok": false,
           "status_code": 503,
-          "latency_ms": 294,
+          "latency_ms": 776,
           "error": null
         },
         {
           "name": "lobby",
           "path": "/r/lobby?limit=1&format=json",
-          "ok": false,
-          "status_code": 503,
-          "latency_ms": 274,
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 5391,
           "error": null
         }
       ]
@@ -65,27 +65,27 @@
     {
       "name": "manual",
       "path": "/llms.txt",
-      "ok": false,
+      "ok": true,
       "status_codes": [
-        503,
-        503
+        200,
+        200
       ],
-      "latency_ms_median": null,
+      "latency_ms_median": 31,
       "samples": [
         {
           "name": "manual",
           "path": "/llms.txt",
-          "ok": false,
-          "status_code": 503,
-          "latency_ms": 711,
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 32,
           "error": null
         },
         {
           "name": "manual",
           "path": "/llms.txt",
-          "ok": false,
-          "status_code": 503,
-          "latency_ms": 302,
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 30,
           "error": null
         }
       ]
