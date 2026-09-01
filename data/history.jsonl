@@ -25,3 +25,4 @@
 {"checked_at":"2026-09-01T05:11:51Z","status":"down","latency_ms":{"healthz":null,"lobby":null,"manual":null}}
 {"checked_at":"2026-09-01T11:41:17Z","status":"down","latency_ms":{"healthz":null,"lobby":null,"manual":40}}
 {"checked_at":"2026-09-01T16:41:28Z","status":"down","latency_ms":{"healthz":null,"lobby":null,"manual":null}}
+{"checked_at":"2026-09-01T21:03:59Z","status":"down","latency_ms":{"healthz":null,"lobby":324,"manual":null}}
