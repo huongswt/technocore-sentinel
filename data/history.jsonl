@@ -22,3 +22,4 @@
 {"checked_at":"2026-08-31T05:37:55Z","status":"operational","latency_ms":{"healthz":2136,"lobby":530,"manual":24}}
 {"checked_at":"2026-08-31T13:54:17Z","status":"degraded","latency_ms":{"healthz":1048,"lobby":null,"manual":null}}
 {"checked_at":"2026-08-31T22:52:41Z","status":"operational","latency_ms":{"healthz":1296,"lobby":3208,"manual":349}}
+{"checked_at":"2026-09-01T05:11:51Z","status":"down","latency_ms":{"healthz":null,"lobby":null,"manual":null}}
