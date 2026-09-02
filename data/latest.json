@@ -1,36 +1,36 @@
 {
   "service": "technocore.chat",
   "base_url": "https://technocore.chat",
-  "status": "operational",
-  "checked_at": "2026-09-02T04:36:52Z",
-  "previous_status": "down",
+  "status": "down",
+  "checked_at": "2026-09-02T11:21:01Z",
+  "previous_status": "operational",
   "status_changed": true,
   "checks": [
     {
       "name": "healthz",
       "path": "/healthz",
-      "ok": true,
+      "ok": false,
       "status_codes": [
-        200,
-        200
+        503,
+        null
       ],
-      "latency_ms_median": 762,
+      "latency_ms_median": null,
       "samples": [
         {
           "name": "healthz",
           "path": "/healthz",
-          "ok": true,
-          "status_code": 200,
-          "latency_ms": 827,
+          "ok": false,
+          "status_code": 503,
+          "latency_ms": 408,
           "error": null
         },
         {
           "name": "healthz",
           "path": "/healthz",
-          "ok": true,
-          "status_code": 200,
-          "latency_ms": 696,
-          "error": null
+          "ok": false,
+          "status_code": null,
+          "latency_ms": 10015,
+          "error": "TimeoutError: The read operation timed out"
         }
       ]
     },
@@ -42,14 +42,14 @@
         200,
         200
       ],
-      "latency_ms_median": 419,
+      "latency_ms_median": 387,
       "samples": [
         {
           "name": "lobby",
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 779,
+          "latency_ms": 704,
           "error": null
         },
         {
@@ -57,7 +57,7 @@
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 59,
+          "latency_ms": 70,
           "error": null
         }
       ]
@@ -70,14 +70,14 @@
         200,
         200
       ],
-      "latency_ms_median": 70,
+      "latency_ms_median": 26,
       "samples": [
         {
           "name": "manual",
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 64,
+          "latency_ms": 23,
           "error": null
         },
         {
@@ -85,7 +85,7 @@
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 77,
+          "latency_ms": 28,
           "error": null
         }
       ]
