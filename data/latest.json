@@ -1,27 +1,27 @@
 {
   "service": "technocore.chat",
   "base_url": "https://technocore.chat",
-  "status": "down",
-  "checked_at": "2026-09-02T16:36:00Z",
+  "status": "operational",
+  "checked_at": "2026-09-02T21:04:41Z",
   "previous_status": "down",
-  "status_changed": false,
+  "status_changed": true,
   "checks": [
     {
       "name": "healthz",
       "path": "/healthz",
-      "ok": false,
+      "ok": true,
       "status_codes": [
-        503,
+        200,
         200
       ],
-      "latency_ms_median": 753,
+      "latency_ms_median": 185,
       "samples": [
         {
           "name": "healthz",
           "path": "/healthz",
-          "ok": false,
-          "status_code": 503,
-          "latency_ms": 447,
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 319,
           "error": null
         },
         {
@@ -29,7 +29,7 @@
           "path": "/healthz",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 753,
+          "latency_ms": 51,
           "error": null
         }
       ]
@@ -37,27 +37,27 @@
     {
       "name": "lobby",
       "path": "/r/lobby?limit=1&format=json",
-      "ok": false,
+      "ok": true,
       "status_codes": [
-        503,
-        503
+        200,
+        200
       ],
-      "latency_ms_median": null,
+      "latency_ms_median": 376,
       "samples": [
         {
           "name": "lobby",
           "path": "/r/lobby?limit=1&format=json",
-          "ok": false,
-          "status_code": 503,
-          "latency_ms": 307,
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 729,
           "error": null
         },
         {
           "name": "lobby",
           "path": "/r/lobby?limit=1&format=json",
-          "ok": false,
-          "status_code": 503,
-          "latency_ms": 305,
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 22,
           "error": null
         }
       ]
@@ -70,14 +70,14 @@
         200,
         200
       ],
-      "latency_ms_median": 474,
+      "latency_ms_median": 438,
       "samples": [
         {
           "name": "manual",
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 64,
+          "latency_ms": 826,
           "error": null
         },
         {
@@ -85,7 +85,7 @@
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 883,
+          "latency_ms": 49,
           "error": null
         }
       ]
