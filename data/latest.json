@@ -1,36 +1,36 @@
 {
   "service": "technocore.chat",
   "base_url": "https://technocore.chat",
-  "status": "down",
-  "checked_at": "2026-09-01T21:03:59Z",
+  "status": "operational",
+  "checked_at": "2026-09-02T04:36:52Z",
   "previous_status": "down",
-  "status_changed": false,
+  "status_changed": true,
   "checks": [
     {
       "name": "healthz",
       "path": "/healthz",
-      "ok": false,
+      "ok": true,
       "status_codes": [
-        null,
-        null
+        200,
+        200
       ],
-      "latency_ms_median": null,
+      "latency_ms_median": 762,
       "samples": [
         {
           "name": "healthz",
           "path": "/healthz",
-          "ok": false,
-          "status_code": null,
-          "latency_ms": 10062,
-          "error": "TimeoutError: The read operation timed out"
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 827,
+          "error": null
         },
         {
           "name": "healthz",
           "path": "/healthz",
-          "ok": false,
-          "status_code": null,
-          "latency_ms": 10020,
-          "error": "TimeoutError: The read operation timed out"
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 696,
+          "error": null
         }
       ]
     },
@@ -42,14 +42,14 @@
         200,
         200
       ],
-      "latency_ms_median": 324,
+      "latency_ms_median": 419,
       "samples": [
         {
           "name": "lobby",
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 622,
+          "latency_ms": 779,
           "error": null
         },
         {
@@ -57,7 +57,7 @@
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 25,
+          "latency_ms": 59,
           "error": null
         }
       ]
@@ -65,27 +65,27 @@
     {
       "name": "manual",
       "path": "/llms.txt",
-      "ok": false,
+      "ok": true,
       "status_codes": [
-        null,
-        503
+        200,
+        200
       ],
-      "latency_ms_median": null,
+      "latency_ms_median": 70,
       "samples": [
         {
           "name": "manual",
           "path": "/llms.txt",
-          "ok": false,
-          "status_code": null,
-          "latency_ms": 10021,
-          "error": "TimeoutError: The read operation timed out"
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 64,
+          "error": null
         },
         {
           "name": "manual",
           "path": "/llms.txt",
-          "ok": false,
-          "status_code": 503,
-          "latency_ms": 9962,
+          "ok": true,
+          "status_code": 200,
+          "latency_ms": 77,
           "error": null
         }
       ]
