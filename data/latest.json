@@ -2,9 +2,9 @@
   "service": "technocore.chat",
   "base_url": "https://technocore.chat",
   "status": "operational",
-  "checked_at": "2026-09-02T21:04:41Z",
-  "previous_status": "down",
-  "status_changed": true,
+  "checked_at": "2026-09-03T04:35:12Z",
+  "previous_status": "operational",
+  "status_changed": false,
   "checks": [
     {
       "name": "healthz",
@@ -14,14 +14,14 @@
         200,
         200
       ],
-      "latency_ms_median": 185,
+      "latency_ms_median": 515,
       "samples": [
         {
           "name": "healthz",
           "path": "/healthz",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 319,
+          "latency_ms": 976,
           "error": null
         },
         {
@@ -29,7 +29,7 @@
           "path": "/healthz",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 51,
+          "latency_ms": 54,
           "error": null
         }
       ]
@@ -49,7 +49,7 @@
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 729,
+          "latency_ms": 699,
           "error": null
         },
         {
@@ -57,7 +57,7 @@
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 22,
+          "latency_ms": 54,
           "error": null
         }
       ]
@@ -70,14 +70,14 @@
         200,
         200
       ],
-      "latency_ms_median": 438,
+      "latency_ms_median": 70,
       "samples": [
         {
           "name": "manual",
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 826,
+          "latency_ms": 59,
           "error": null
         },
         {
@@ -85,7 +85,7 @@
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 49,
+          "latency_ms": 82,
           "error": null
         }
       ]
