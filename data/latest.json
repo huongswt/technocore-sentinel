@@ -2,7 +2,7 @@
   "service": "technocore.chat",
   "base_url": "https://technocore.chat",
   "status": "operational",
-  "checked_at": "2026-09-29T22:16:50Z",
+  "checked_at": "2026-09-30T05:34:44Z",
   "previous_status": "operational",
   "status_changed": false,
   "checks": [
@@ -14,14 +14,14 @@
         200,
         200
       ],
-      "latency_ms_median": 191,
+      "latency_ms_median": 414,
       "samples": [
         {
           "name": "healthz",
           "path": "/healthz",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 344,
+          "latency_ms": 801,
           "error": null
         },
         {
@@ -29,7 +29,7 @@
           "path": "/healthz",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 38,
+          "latency_ms": 28,
           "error": null
         }
       ]
@@ -42,14 +42,14 @@
         200,
         200
       ],
-      "latency_ms_median": 378,
+      "latency_ms_median": 372,
       "samples": [
         {
           "name": "lobby",
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 739,
+          "latency_ms": 727,
           "error": null
         },
         {
@@ -57,7 +57,7 @@
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 17,
+          "latency_ms": 18,
           "error": null
         }
       ]
@@ -70,14 +70,14 @@
         200,
         200
       ],
-      "latency_ms_median": 184,
+      "latency_ms_median": 33,
       "samples": [
         {
           "name": "manual",
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 311,
+          "latency_ms": 32,
           "error": null
         },
         {
@@ -85,7 +85,7 @@
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 56,
+          "latency_ms": 34,
           "error": null
         }
       ]
