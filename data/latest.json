@@ -2,7 +2,7 @@
   "service": "technocore.chat",
   "base_url": "https://technocore.chat",
   "status": "operational",
-  "checked_at": "2026-10-14T17:13:55Z",
+  "checked_at": "2026-10-14T21:42:36Z",
   "previous_status": "operational",
   "status_changed": false,
   "checks": [
@@ -14,14 +14,14 @@
         200,
         200
       ],
-      "latency_ms_median": 520,
+      "latency_ms_median": 458,
       "samples": [
         {
           "name": "healthz",
           "path": "/healthz",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 694,
+          "latency_ms": 844,
           "error": null
         },
         {
@@ -29,7 +29,7 @@
           "path": "/healthz",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 347,
+          "latency_ms": 73,
           "error": null
         }
       ]
@@ -42,14 +42,14 @@
         200,
         200
       ],
-      "latency_ms_median": 220,
+      "latency_ms_median": 298,
       "samples": [
         {
           "name": "lobby",
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 313,
+          "latency_ms": 551,
           "error": null
         },
         {
@@ -57,7 +57,7 @@
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 128,
+          "latency_ms": 46,
           "error": null
         }
       ]
@@ -70,14 +70,14 @@
         200,
         200
       ],
-      "latency_ms_median": 236,
+      "latency_ms_median": 322,
       "samples": [
         {
           "name": "manual",
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 335,
+          "latency_ms": 573,
           "error": null
         },
         {
@@ -85,7 +85,7 @@
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 138,
+          "latency_ms": 70,
           "error": null
         }
       ]
