@@ -2,7 +2,7 @@
   "service": "technocore.chat",
   "base_url": "https://technocore.chat",
   "status": "operational",
-  "checked_at": "2026-10-27T18:03:35Z",
+  "checked_at": "2026-10-27T22:15:26Z",
   "previous_status": "operational",
   "status_changed": false,
   "checks": [
@@ -14,14 +14,14 @@
         200,
         200
       ],
-      "latency_ms_median": 884,
+      "latency_ms_median": 541,
       "samples": [
         {
           "name": "healthz",
           "path": "/healthz",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 1118,
+          "latency_ms": 997,
           "error": null
         },
         {
@@ -29,7 +29,7 @@
           "path": "/healthz",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 651,
+          "latency_ms": 85,
           "error": null
         }
       ]
@@ -42,14 +42,14 @@
         200,
         200
       ],
-      "latency_ms_median": 318,
+      "latency_ms_median": 402,
       "samples": [
         {
           "name": "lobby",
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 583,
+          "latency_ms": 711,
           "error": null
         },
         {
@@ -57,7 +57,7 @@
           "path": "/r/lobby?limit=1&format=json",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 52,
+          "latency_ms": 92,
           "error": null
         }
       ]
@@ -70,14 +70,14 @@
         200,
         200
       ],
-      "latency_ms_median": 379,
+      "latency_ms_median": 454,
       "samples": [
         {
           "name": "manual",
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 636,
+          "latency_ms": 784,
           "error": null
         },
         {
@@ -85,7 +85,7 @@
           "path": "/llms.txt",
           "ok": true,
           "status_code": 200,
-          "latency_ms": 122,
+          "latency_ms": 125,
           "error": null
         }
       ]
