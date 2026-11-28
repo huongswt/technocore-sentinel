@@ -299,3 +299,4 @@
 {"checked_at":"2026-11-26T21:34:26Z","status":"operational","latency_ms":{"healthz":445,"lobby":388,"manual":389}}
 {"checked_at":"2026-11-27T08:37:16Z","status":"operational","latency_ms":{"healthz":503,"lobby":372,"manual":380}}
 {"checked_at":"2026-11-27T21:18:53Z","status":"operational","latency_ms":{"healthz":544,"lobby":411,"manual":71}}
+{"checked_at":"2026-11-28T07:51:50Z","status":"operational","latency_ms":{"healthz":346,"lobby":292,"manual":338}}
